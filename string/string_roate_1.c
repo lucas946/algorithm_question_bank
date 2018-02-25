@@ -8,6 +8,7 @@
 
 #include<stdio.h>
 
+//该方法时间复杂度为O(mn)，空间复杂度为O(1)
 void LeftShiftOne(char *s, int n){
     //保存第一个字符
     char t = s[0];
