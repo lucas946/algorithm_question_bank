@@ -90,15 +90,62 @@ void non_recursive_pre(TreeNode* root){
 	}	
 }
 
+void non_recursive_in(TreeNode *root){
+	if(root == NULL)
+		return;
+	TreeNode *p = root;
+	stack<TreeNode*> stk;
+	while(p != NULL || !stk.empty()){
+		while(p!=NULL){
+			stk.push(p);
+			p = p->lchild;
+		}
+		if(!stk.empty()){
+			p = stk.top();
+			cout<<p->data<<" ";
+			stk.pop();
+			p = p->rchild;
+		}
+	}
+}
+
+void non_recursive_post(TreeNode *root){
+	if(root == NULL)
+		return;
+	TreeNode *p = root;
+	pair<TreeNode*, bool> temp;
+	stack<pair<TreeNode*, bool> > stk;
+	while(p!=NULL || !stk.empty()){
+		while(p!=NULL){
+			temp = make_pair(p, true);
+			stk.push(temp);
+			p = p->lchild;
+		}
+		if(!stk.empty()){
+			if(stk.top().second == true){
+				stk.top().second = false;
+				p = p->rchild;
+			}
+			else{
+				cout<<stk.top().first->data<<" ";
+				stk.pop();
+			}
+		}
+	}
+
+}
+
 int main(){
 	TreeNode* root = NULL;
 	create_tree(root);
-	pre_order_traverse(root);
-	cout<<endl;
-	in_order_traverse(root);
-	cout<<endl;
+	//pre_order_traverse(root);
+	//cout<<endl;
+	//in_order_traverse(root);
+	//cout<<endl;
 	//post_order_traverse(root);
 	//non_recursive_pre(root);
-	//cout<<endl;
+	//non_recursive_in(root);
+	non_recursive_post(root);
+	cout<<endl;
 	return 0;
 }
