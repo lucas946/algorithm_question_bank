@@ -9,36 +9,39 @@
 
 using namespace std;
 
-void merge(vector<int> *nums, vector<int>::iterator begin, vector<int>::iterator mid, vector<int>::iterator end){
-	int p = 0,q = 0;
-	vector<int> m, n;
-	vector<int>::iterator i;
-	for(i=begin;i<=mid;++i)
-		m.push_back(*i);
+void merge(vector<int> &nums, int low, int mid, int high){
+	int p=0, q=0;
+	vector<int> m,n;
+	for(int i=low;i<=mid;++i)
+		m.push_back(nums[i]);
 	m.push_back(INT_MAX);
-	for(i=mid+1;i<=end;++i)
-		n.push_back(*i);
+	for(int i=mid+1;i<=high;++i)
+		n.push_back(nums[i]);
 	n.push_back(INT_MAX);
-	for(i=begin;i<=end;++i){
-		if(m[p] <= n[q]){
-			*i = m[p];
+	for(int i=low;i<high+1;++i){
+		if(m[p]<n[q]){
+			nums[i] = m[p];
 			++p;
 		}
 		else{
-			*i = n[q];
+			nums[i] = n[q];
 			++q;
 		}
 	}
-	
+
 }
 
-void mergesort(vector<int> *nums, vector<int>::iterator begin, vector<int>::iterator end){
-	if(begin < end){
-		vector<int>::iterator mid = begin + (end-begin)/2;
-		mergesort(nums, begin, mid);
-		mergesort(nums, mid+1, end);
-		merge(nums, begin, mid, end);
+void mergesort(vector<int> &nums, int low, int high){
+	if(low < high){
+		int mid = low + (high-low)/2;
+		mergesort(nums, low, mid);
+		mergesort(nums, mid+1, high);
+		merge(nums, low, mid, high);
 	}
+}
+
+void msort(vector<int> &nums){
+	mergesort(nums, 0, nums.size()-1);
 }
 
 int main(){
@@ -47,10 +50,9 @@ int main(){
 	for(int i=0;i<nums.size();++i)
 		cout<<nums[i]<<" ";
 	cout<<endl;
-	mergesort(&nums,nums.begin(),nums.end()-1);
+	msort(nums);
 	for(int i=0;i<nums.size();++i)
 		cout<<nums[i]<<" ";
 	cout<<endl;	
 	return 0;
 }
-
