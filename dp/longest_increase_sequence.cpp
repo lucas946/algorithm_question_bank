@@ -12,6 +12,7 @@ using namespace std;
 int LIS(vector<int> &sequences){
 	int length = sequences.size();
 	int dp[length];
+	int result = 1;
 	for(int i=0;i<length;++i)
 		dp[i] = 1;
 	for(int i=1;i<length;++i){
@@ -22,9 +23,9 @@ int LIS(vector<int> &sequences){
 				dp[i] = dp[j]+1;
 			}
 		}
+		if(dp[i]>result) result = dp[i];
 	}
-	sort(dp,dp+length);
-	return dp[length-1];
+	return result;
 }
 
 int main(){
