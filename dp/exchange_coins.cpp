@@ -3,7 +3,7 @@
  * 用这三种面值的硬币来兑换该金额至少需要多少硬币？
  *
  * 状态定义：dp[i]表示金额i至少需要多少硬币兑换
- * 状态转移方程：dp[i] = min{dp[i-coins[j]+1]}
+ * 状态转移方程：dp[i] = min{dp[i-coins[j]]+1}
  */
 #include<iostream>
 #include<climits>
