@@ -2,7 +2,7 @@
  * 给定一个序列，求该序列的最长非降子序列的长度
  *
  * 状态定义：dp[i]以i结尾的最长非降子序列的长度>=1
- * 状态转移方程：dp[i]=max{dp[j]+1}，其中，j<i,seq[j]>seq[i]
+ * 状态转移方程：dp[i]=max{dp[j]+1}，其中，j<i,seq[j]<=seq[i]
  */
 #include<iostream>
 #include<vector>

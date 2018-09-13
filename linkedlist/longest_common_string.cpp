@@ -62,7 +62,6 @@ ListNode *longest_common_string(ListNode *head1, ListNode *head2, int &common){
 	}
 	int count = 0;
 	common = max;
-	cout<<max<<endl;
 	while(head!=flag){
 		++count;
 		head = head->next;
