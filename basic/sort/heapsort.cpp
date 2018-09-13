@@ -1,33 +1,34 @@
-#include<iostream>
-#include<vector>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
-void heap_build(vector<int>&nums, int root, int len){
-	int lchild = root*2+1;
-	if(lchild<len){
-		int rchild = lchild+1;
-		int flag = lchild;
-		if(rchild<len){
-			if(nums[rchild]>nums[lchild])
-				flag = rchild;
-		}
-		if(nums[root]<nums[flag]){
-			swap(nums[root], nums[flag]);
-			heap_build(nums, flag, len);
-		}
-	}
+void heap_build(vector<int> &nums, int root, int len) {
+    int lchild = 2 * root + 1;
+    if(lchild < len) {
+        int flag = lchild;
+        int rchild = lchild + 1;
+        if(rchild < len){
+            if(nums[rchild] > nums[lchild]) {
+                flag = rchild;
+            }
+        }
+        if(nums[root] < nums[flag]) {
+            swap(nums[root], nums[flag]);
+            heap_build(nums, flag, len);
+        }
+    }
 }
 
-void heap_sort(vector<int> &nums){
-	int len = nums.size();
-	for(int i=len/2-1;i>=0;--i)
-		heap_build(nums, i, len);
-	for(int i=len-1;i>=0;--i){
-		swap(nums[0],nums[i]);
-		heap_build(nums,0,i);
-	}
-
+void heap_sort(vector<int> &nums) {
+    int len = nums.size();
+    for(int i = len/2-1 ; i >= 0; --i){ //从最后一个非叶子节点开始建堆
+        heap_build(nums, i, len);
+    }
+    for(int i = len-1; i >= 0; --i) {
+        swap(nums[0], nums[i]);
+        heap_build(nums, 0, i);
+    }
 }
 
 int main(){

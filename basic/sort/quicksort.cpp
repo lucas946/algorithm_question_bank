@@ -1,6 +1,11 @@
 /*快速排序
  * 输入：N个整数
  * 输出：排序好的N个整数
+ * 
+ * 平均时间复杂度：O(nlogn)
+ * 最坏时间复杂度：O(n^2)
+ * 空间复杂度：O(nlogn)
+ * 稳定性：不稳定
  */
 #include<iostream>
 #include<vector>
