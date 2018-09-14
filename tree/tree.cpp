@@ -124,7 +124,7 @@ void non_recursive_post(TreeNode *root){
 		if(!stk.empty()){
 			if(stk.top().second == true){
 				stk.top().second = false;
-				p = p->rchild;
+				p = stk.top().first->rchild;
 			}
 			else{
 				cout<<stk.top().first->data<<" ";
